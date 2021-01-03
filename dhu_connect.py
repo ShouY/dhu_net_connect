@@ -107,15 +107,15 @@ def connect(username: str, password: str):
     return resp.ok
 
 
-def try_connect(user: str, password: str, retry: int, interval: float):
+def try_connect(username: str, password: str, retry: int, interval: float):
     connect_times = 0
     connected = test_connection()
 
     while not connected and connect_times < retry:
         connect_times += 1
 
-        cnc_log.info("connect to campus network: {}".format(user))
-        if not connect(username=user, password=password):
+        cnc_log.info("connect to campus network: {}".format(username))
+        if not connect(username=username, password=password):
             cnc_log.warning("connect error")
         time.sleep(interval)
         connected = test_connection()
