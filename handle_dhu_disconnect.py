@@ -10,7 +10,7 @@ import time
 
 if __name__ == "__main__":
     data = parse()
-    cnc_log.info("guarding network connectting")
+    cnc_log.info("guarding network connecting")
     for i in range(100):
         if not test_connection():
             cnc_log.info("dhu campus network disconnect")
