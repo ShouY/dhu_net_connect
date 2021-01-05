@@ -1,4 +1,4 @@
-# DHH Campus Network Automatic Connect
+# DHU Campus Network Automatic Connect
 
 用于自动连接校园网的脚本。通过设置定时执行，可以在校园网断开时自动重连。
 
