@@ -16,11 +16,11 @@
 #       try_connect(校园网账号,密码,10,2)
 #       ```
 
-import time
 import logging
-from http import client
 import sys
-import requests
+import time
+
+from dhu_intranet import connect, test_connection
 
 # DHU Campus Network Connect logger
 cnc_log = logging.getLogger("dhu CNC")
@@ -70,41 +70,6 @@ def parse():
     except ValueError:
         return
     return data
-
-
-def test_connection(test_url: str = "baidu.com"):
-    """测试是否连接到网络"""
-    conn = client.HTTPConnection(test_url)
-    conn.request("GET", "/")
-    return conn.getresponse().getcode() == 200
-
-
-def connect(username: str, password: str):
-    """ 连接校园网
-
-    Args:
-        username: 用户学号
-        password: 校园网账号的密码
-
-    Returns:
-        是否连接成功。
-    """
-    config = {
-        'username': username,
-        'password': password,
-        'savePWD': 'on'
-    }
-    sess = requests.Session()
-    sess.get("http://msfttestconnect.com")
-    if not sess.verify:
-        cnc_log.warning("session is not verified")
-        return False
-
-    sess.cookies.set("pwd", "")
-    sess.cookies.set("username", config['username'])
-    sess.cookies.set("smartdot", "")
-    resp = sess.post("https://portalnew2.dhu.edu.cn/post.php", data=config)
-    return resp.ok
 
 
 def try_connect(username: str, password: str, retry: int, interval: float):
